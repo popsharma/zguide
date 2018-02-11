@@ -21,7 +21,8 @@ int main () {
     //  Prepare our context and publisher
     zmq::context_t context (1);
     zmq::socket_t publisher (context, ZMQ_PUB);
-    publisher.bind("tcp://*:5556");
+    // publisher.bind("tcp://*:5556");
+    publisher.connect("tcp://127.0.0.1:5556");
     publisher.bind("ipc://weather.ipc");				// Not usable on Windows.
 
     //  Initialize random number generator
@@ -39,6 +40,7 @@ int main () {
         zmq::message_t message(20);
         snprintf ((char *) message.data(), 20 ,
         	"%05d %d %d", zipcode, temperature, relhumidity);
+	printf("%s\n", (char *) message.data());
         publisher.send(message);
 
     }
