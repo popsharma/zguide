@@ -10,7 +10,8 @@
 
 //  Include a bunch of headers that we will need in the examples
 
-#include <zmq.h>
+//#include <zmq.h>
+#include "/usr/local/include/zmq.h"
 
 #include <assert.h>
 #include <signal.h>

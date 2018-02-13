@@ -10,7 +10,8 @@ int main (int argc, char *argv [])
     printf ("Collecting updates from weather server...\n");
     void *context = zmq_ctx_new ();
     void *subscriber = zmq_socket (context, ZMQ_SUB);
-    int rc = zmq_connect (subscriber, "tcp://localhost:5556");
+    // int rc = zmq_connect (subscriber, "tcp://localhost:5556");
+    int rc = zmq_connect (subscriber, "tcp://localhost:8100");
     assert (rc == 0);
 
     //  Subscribe to zipcode, default is NYC, 10001
@@ -19,10 +20,10 @@ int main (int argc, char *argv [])
                          filter, strlen (filter));
     assert (rc == 0);
 
-    //  Process 100 updates
+    //  Process 10 updates
     int update_nbr;
     long total_temp = 0;
-    for (update_nbr = 0; update_nbr < 100; update_nbr++) {
+    for (update_nbr = 0; update_nbr < 10; update_nbr++) {
         char *string = s_recv (subscriber);
 
         int zipcode, temperature, relhumidity;
@@ -30,6 +31,7 @@ int main (int argc, char *argv [])
             &zipcode, &temperature, &relhumidity);
         total_temp += temperature;
         free (string);
+    	printf("temperature: %d\n", temperature);
     }
     printf ("Average temperature for zipcode '%s' was %dF\n",
         filter, (int) (total_temp / update_nbr));

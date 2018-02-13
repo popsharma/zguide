@@ -15,11 +15,12 @@ int main (int argc, char *argv[])
     // frontend.connect("tcp://192.168.55.210:5556");
     // frontend.connect("tcp://127.0.0.1:5556");
     frontend.bind("tcp://*:5556");
+    // frontend.bind("tcp://127.0.0.1:5556");
 
     //  This is our public endpoint for subscribers
     zmq::socket_t backend (context, ZMQ_PUB);
     // backend.bind("tcp://10.1.1.0:8100");
-    backend.bind("tcp://127.0.0.1:8100");
+    backend.bind("tcp://*:8100");
 
     //  Subscribe on everything
     frontend.setsockopt(ZMQ_SUBSCRIBE, "", 0);
