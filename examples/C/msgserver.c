@@ -10,7 +10,8 @@ int main (void)
     void *context = zmq_ctx_new ();
     void *publisher = zmq_socket (context, ZMQ_PUB);
     // int rc = zmq_bind (publisher, "tcp://*:5556");
-    int rc = zmq_connect (publisher, "tcp://127.0.0.1:5556");
+    //int rc = zmq_connect (publisher, "tcp://127.0.0.1:5556");
+    int rc = zmq_connect (publisher, "tcp://10.20.8.12:5556");
     assert (rc == 0);
 
     //  Initialize random number generator
