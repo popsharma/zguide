@@ -12,10 +12,13 @@ int main (int argc, char *argv [])
     void *subscriber = zmq_socket (context, ZMQ_SUB);
     // int rc = zmq_connect (subscriber, "tcp://localhost:5556");
     int rc = zmq_connect (subscriber, "tcp://localhost:8100");
+    // int rc = zmq_bind (subscriber, "tcp://*:5556");
     assert (rc == 0);
 
     //  Subscribe to zipcode, default is NYC, 10001
-    char *filter = (argc > 1)? argv [1]: "10001 ";
+    // char *filter = (argc > 1)? argv [1]: "10001 ";
+    // char *filter = (argc > 1)? argv [1]: "1 ";
+    char *filter = "";
     rc = zmq_setsockopt (subscriber, ZMQ_SUBSCRIBE,
                          filter, strlen (filter));
     assert (rc == 0);

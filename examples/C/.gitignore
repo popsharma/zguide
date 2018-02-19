@@ -103,3 +103,6 @@ eagain
 rtreq
 dechat
 
+/msgclient
+/msgproxy
+/msgserver
